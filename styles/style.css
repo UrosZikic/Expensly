@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: roboto;
+  font-weight: 500;
+  background-color: #a0ff70;
+}
+
+.turn_to_upperCase {
+  text-transform: uppercase;
+}
+
+/* list */
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.6rem;
+  transition: all 0.5s;
+}
+a:hover {
+  color: red;
+}
+/* flex */
+.d_flex {
+  display: flex;
+}
+.j_flex_apart {
+  justify-content: space-around;
+}
+.j_flex_between {
+  justify-content: space-between;
+}
+
+.a_flex_center {
+  align-items: center;
+}
+
+.flex_gap_s {
+  gap: 4rem;
+}
+
+/* navigation */
+nav {
+  padding: 4rem 12rem;
+}
+
+.logo_img {
+  width: 20rem;
+  height: 12rem;
+  object-fit: cover;
+}
