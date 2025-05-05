@@ -32,6 +32,9 @@ a:hover {
 .d_flex {
   display: flex;
 }
+.flex_dir_col {
+  flex-direction: column;
+}
 .j_flex_apart {
   justify-content: space-around;
 }
@@ -46,7 +49,9 @@ a:hover {
 .flex_gap_s {
   gap: 4rem;
 }
-
+.flex_gap_xs {
+  gap: 1rem;
+}
 /* navigation */
 nav {
   padding: 4rem 12rem;
@@ -56,4 +61,30 @@ nav {
   width: 20rem;
   height: 12rem;
   object-fit: cover;
+}
+
+/* forms */
+.registration_container {
+  width: 100%;
+  max-width: 100rem;
+  margin: 10rem auto;
+  border: 2px solid red;
+  padding: 0.5rem;
+  align-items: center;
+}
+.form_width {
+  width: 100%;
+  max-width: 60rem;
+  z-index: 2;
+  justify-content: space-between;
+}
+form input {
+  padding: 1rem 2rem;
+  border: none;
+}
+
+.registration_container img {
+  width: 100%;
+  max-width: 40rem;
+  z-index: 1;
 }

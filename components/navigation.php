@@ -8,15 +8,13 @@
     <?php
     $nav_link_list = [
       'home',
-      'service',
-      'about',
-      'careers',
-      'contact'
+      'account',
     ];
     foreach ($nav_link_list as $n_l_l) {
       ?>
       <li>
-        <a class="turn_to_upperCase" href="/<?php echo $n_l_l ?>"><?php echo $n_l_l; ?></a>
+        <a class="turn_to_upperCase"
+          href="<?php echo $n_l_l !== "home" ? ("/pages/" . $n_l_l . ".php") : "/" ?>"><?php echo $n_l_l ?></a>
       </li>
     <?php } ?>
   </ul>
