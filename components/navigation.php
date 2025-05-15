@@ -8,7 +8,7 @@
     <?php
     $nav_link_list = [
       'home',
-      'account',
+      'sign_up',
     ];
     foreach ($nav_link_list as $n_l_l) {
       ?>

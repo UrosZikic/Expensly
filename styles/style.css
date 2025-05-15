@@ -11,6 +11,9 @@ html {
   background-color: #a0ff70;
 }
 
+.hidden {
+  display: none;
+}
 .turn_to_upperCase {
   text-transform: uppercase;
 }
@@ -66,25 +69,17 @@ nav {
 /* forms */
 .registration_container {
   width: 100%;
-  max-width: 100rem;
+  max-width: 50rem;
   margin: 10rem auto;
-  border: 2px solid red;
-  padding: 0.5rem;
+  border: 3px solid white;
+  border-radius: 1rem;
+  padding: 2rem;
   align-items: center;
 }
 .form_width {
   width: 100%;
-  max-width: 60rem;
-  z-index: 2;
-  justify-content: space-between;
 }
 form input {
   padding: 1rem 2rem;
   border: none;
-}
-
-.registration_container img {
-  width: 100%;
-  max-width: 40rem;
-  z-index: 1;
 }
