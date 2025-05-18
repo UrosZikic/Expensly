@@ -17,6 +17,15 @@ html {
 .turn_to_upperCase {
   text-transform: uppercase;
 }
+.center_object {
+  width: 100%;
+  margin: 0 auto;
+}
+/* register notification */
+.register_notification_container {
+  max-width: 32rem;
+  border: 5px solid white;
+}
 
 /* list */
 ul {
