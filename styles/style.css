@@ -11,6 +11,10 @@ html {
   background-color: #a0ff70;
 }
 
+p {
+  font-size: 1.8rem;
+}
+
 .hidden {
   display: none;
 }
@@ -23,8 +27,10 @@ html {
 }
 /* register notification */
 .register_notification_container {
+  min-width: 24rem;
   max-width: 32rem;
   border: 5px solid white;
+  padding: 2rem 1rem;
 }
 
 /* list */
@@ -52,6 +58,9 @@ a:hover {
 }
 .j_flex_between {
   justify-content: space-between;
+}
+.j_flex_center {
+  justify-content: center;
 }
 
 .a_flex_center {

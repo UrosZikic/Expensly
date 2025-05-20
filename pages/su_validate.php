@@ -49,7 +49,25 @@ if ($nicknames) {
   exit;
 }
 
-// 
+// password validation
+if (strlen($password) <= 10) {
+  $memorize_signup_details['error'] = 'password_!_short';
+  $memorize_signup_details['password'] = '';
+  $_SESSION['m_s_d'] = $memorize_signup_details;
+  Header("Location: sign_up.php?password=too_short");
+  exit();
+}
+
+
+if (!preg_match('/[!@#$%^&*()\-_=+{};:,<.>?\/\\\\|[\]~`]/', $password) || !preg_match('/[0-9]/', $password) || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password)) {
+  $memorize_signup_details['error'] = 'password_!_special_char';
+  $memorize_signup_details['password'] = '';
+  $_SESSION['m_s_d'] = $memorize_signup_details;
+  Header("Location: sign_up.php?password=special_char_missing");
+  exit();
+}
+
+
 
 
 if ($password !== $re_pass) {
