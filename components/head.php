@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_COOKIE['signed']) && isset($_SESSION['m_s_d'])) {
+  session_unset();
+  // Header("Location: index.php");
+  // exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

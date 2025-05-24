@@ -1,7 +1,7 @@
 <?php
 require_once '../components/head.php';
-session_start();
 $validate = false;
+
 if (isset($_SESSION['m_s_d'])) {
   $validate = true;
   $validate_prev_try = $_SESSION["m_s_d"];
@@ -9,6 +9,7 @@ if (isset($_SESSION['m_s_d'])) {
     // $validate will trigger outfill on input fields only in case of an actual error
     print_r($_SESSION['m_s_d']);
 }
+
 ?>
 
 <div
@@ -46,8 +47,9 @@ if (isset($_SESSION['m_s_d'])) {
 <div class="registration_container d_flex flex_gap_s">
   <form class="d_flex flex_dir_col flex_gap_xs form_width" action="su_validate.php" method="post">
     <h2>Register your profile!</h2>
-    <input type="text" name="full_name" placeholder="enter your name" value="<?php if ($validate)
+    <input type="text" name="full_name" placeholder="enter your name" value="<?php if ($validate) {
       echo $validate_prev_try['full_name'];
+    }
     ?>" required>
     <input type="text" name="nickname" placeholder="enter your nickname" value="<?php if ($validate && !isset($_GET['nickname']))
       echo $validate_prev_try['nick_name'] ?>" required>

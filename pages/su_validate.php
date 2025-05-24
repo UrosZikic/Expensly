@@ -25,7 +25,7 @@ if (!$email) {
 $stmt_e = $conn->prepare("SELECT email FROM profiles WHERE email = :email");
 $stmt_e->bindParam(':email', $email);
 $stmt_e->execute();
-$emails = $stmt_e->fetchAll(PDO::FETCH_ASSOC);
+$emails = $stmt_e->fetch(PDO::FETCH_ASSOC);
 if ($emails) {
   $memorize_signup_details['error'] = 'email_duplicate';
   $memorize_signup_details['email'] = "";
@@ -38,7 +38,7 @@ if ($emails) {
 $stmt_nn = $conn->prepare("SELECT nickname FROM profiles WHERE nickname = :nickname");
 $stmt_nn->bindParam(':nickname', $nickname);
 $stmt_nn->execute();
-$nicknames = $stmt_nn->fetchAll(PDO::FETCH_ASSOC);
+$nicknames = $stmt_nn->fetch(PDO::FETCH_ASSOC);
 if ($nicknames) {
   $memorize_signup_details['error'] = 'nickname_duplicate';
   $memorize_signup_details['nick_name'] = '';

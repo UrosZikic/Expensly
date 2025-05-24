@@ -15,6 +15,10 @@ p {
   font-size: 1.8rem;
 }
 
+.text_center {
+  text-align: center;
+}
+
 .hidden {
   display: none;
 }
@@ -73,6 +77,18 @@ a:hover {
 .flex_gap_xs {
   gap: 1rem;
 }
+
+.align_self_baseline {
+  align-self: baseline;
+}
+/* grid */
+.d_grid {
+  display: grid;
+}
+.grid_2_1 {
+  grid-template-columns: 2fr 1fr;
+}
+
 /* navigation */
 nav {
   padding: 4rem 12rem;
@@ -88,11 +104,14 @@ nav {
 .registration_container {
   width: 100%;
   max-width: 50rem;
-  margin: 10rem auto;
+  margin: 5rem auto;
   border: 3px solid white;
   border-radius: 1rem;
   padding: 2rem;
   align-items: center;
+}
+.registration_margin_custom_small {
+  margin: 0 auto;
 }
 .form_width {
   width: 100%;
@@ -100,4 +119,22 @@ nav {
 form input {
   padding: 1rem 2rem;
   border: none;
+}
+
+/* index main */
+.main_max {
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+  border: 2px solid white;
+}
+
+/* paddings */
+.pad_horizontal_xs {
+  padding: 0 1rem;
+}
+
+/* borders */
+.border_rad_s {
+  border-radius: 10px;
 }
