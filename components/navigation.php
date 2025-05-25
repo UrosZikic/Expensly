@@ -6,7 +6,7 @@
 
   <ul class="d_flex j_flex_apart flex_gap_s">
     <?php
-    $sign_in_out = isset($_SESSION['m_s_d']) ? 'sign_out' : 'sign_in';
+    $sign_in_out = isset($_SESSION['m_si_d']) ? 'sign_out' : 'sign_in';
     $nav_link_list = [
       'home',
       'sign_up',

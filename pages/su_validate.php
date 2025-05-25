@@ -78,7 +78,7 @@ if ($password !== $re_pass) {
   exit;
 }
 
-// try {
+
 $stmt = $conn->prepare("INSERT INTO profiles (full_name, nickname, email, pass)
                             VALUES (:full_name, :nickname, :email, :pass)");
 

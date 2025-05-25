@@ -1,8 +1,19 @@
 <?php
 
-
+require_once "DB/connect.php";
 require "components/head.php";
 
+// fetch budget
+$stmt_budget = "SELECT 
+    monthly_budget.budget
+FROM monthly_budget
+JOIN profiles ON monthly_budget.user_id = profiles.user_id;";
+
+$budget_result = $conn->query($stmt_budget);
+
+if ($budget_result) {
+  $row = $budget_result->fetch(PDO::FETCH_ASSOC);
+}
 ?>
 <main class="main_max border_rad_s pad_horizontal_xs">
   <section class="registration_container text_center">
@@ -25,8 +36,9 @@ require "components/head.php";
     <section class="d_grid grid_2_1">
       <div class="registration_container registration_margin_custom_small d_flex flex_dir_col">
         <div class="align_self_baseline">
-          <p>Remaining budget: <?php ?></p>
+          <p>Remaining budget: <?php echo $row['budget'] . ' RSD' ?></p>
           <hr>
+          <br>
           <p>Expense Record</p>
           <ul>
 
@@ -35,9 +47,9 @@ require "components/head.php";
         </div>
       </div>
       <div class="d_flex flex_dir_col flex_gap_xs pad_horizontal_xs">
-        <form action=""
+        <form action="pages/set_budget.php" method="post"
           class="registration_container d_flex flex_gap_s registration_margin_custom_small flex_dir_col flex_gap_xs form_width">
-          <input type="number" placeholder="set this month's budget" class="align_self_baseline">
+          <input type="number" name="budget" placeholder="set this month's budget" class="align_self_baseline">
           <input type="submit" class="align_self_baseline">
         </form>
         <form action=""
