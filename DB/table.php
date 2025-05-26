@@ -16,6 +16,7 @@ $db_table .=
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 expense_name VARCHAR(60) NOT NULL,
 expense_price INT NOT NULL,
+month VARCHAR(9) NOT NULL,
 user_id INT UNSIGNED NOT NULL,
 FOREIGN KEY (user_id) REFERENCES profiles(user_id), 
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

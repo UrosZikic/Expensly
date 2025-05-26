@@ -3,25 +3,40 @@
 require_once "DB/connect.php";
 require "components/head.php";
 
-// fetch budget
-$stmt_budget = "SELECT 
-    monthly_budget.budget
-FROM monthly_budget
-JOIN profiles ON monthly_budget.user_id = profiles.user_id;";
+if (isset($_SESSION['m_si_d'])) {
+  $fetch_nickname = $_SESSION['m_si_d'];
+  $nickname = $fetch_nickname['nickname'];
 
-$budget_result = $conn->query($stmt_budget);
 
-if ($budget_result) {
-  $row = $budget_result->fetch(PDO::FETCH_ASSOC);
+  // fetch budget
+  $stmt = $conn->prepare("
+    SELECT monthly_budget.budget
+    FROM monthly_budget
+    JOIN profiles ON monthly_budget.user_id = profiles.user_id
+    WHERE profiles.nickname = :nickname
+");
+  $stmt->execute(['nickname' => $nickname]);
+  $budget = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+  // fetch expenses
+  $stmt_expense = $conn->prepare("
+    SELECT expenses.expense_price, expenses.expense_name
+    FROM expenses
+    JOIN profiles ON expenses.user_id = profiles.user_id
+");
+  $stmt_expense->execute();
+  $expense = $stmt_expense->fetchAll(PDO::FETCH_ASSOC);
+
 }
+
+
 ?>
 <main class="main_max border_rad_s pad_horizontal_xs">
   <section class="registration_container text_center">
     <h1>
       <?php
-      if (isset($_SESSION['m_si_d'])) {
-        $fetch_nickname = $_SESSION['m_si_d'];
-        $nickname = $fetch_nickname['nickname'];
+      if (isset($nickname)) {
         echo "Welcome " . $nickname . ", start documenting your expenses";
       } else {
         echo "Welcome, log in or register a new account";
@@ -36,26 +51,39 @@ if ($budget_result) {
     <section class="d_grid grid_2_1">
       <div class="registration_container registration_margin_custom_small d_flex flex_dir_col">
         <div class="align_self_baseline">
-          <p>Remaining budget: <?php echo $row['budget'] . ' RSD' ?></p>
+          <p>Remaining budget: <?php if (isset($budget) && is_array($budget)) {
+            echo $budget['budget'] . ' RSD for the month of ' . Date('M');
+          }
+          ?></p>
           <hr>
           <br>
           <p>Expense Record</p>
           <ul>
-
-
+            <?php
+            foreach ($expense as $row) {
+              ?>
+              <div class="d_flex flex_gap_xs">
+                <p><?php echo $row['expense_name']; ?>:</p>
+                <p><?php echo $row['expense_price']; ?></p>
+              </div>
+              <?php
+            }
+            ?>
           </ul>
         </div>
       </div>
       <div class="d_flex flex_dir_col flex_gap_xs pad_horizontal_xs">
-        <form action="pages/set_budget.php" method="post"
+        <?php if (!$budget) { ?>
+          <form action="pages/set_budget.php" method="post"
+            class="registration_container d_flex flex_gap_s registration_margin_custom_small flex_dir_col flex_gap_xs form_width">
+            <input type="number" name="budget" placeholder="set this month's budget" class="align_self_baseline">
+            <input type="submit" class="align_self_baseline">
+          </form>
+        <?php } ?>
+        <form action="pages/set_expense.php" method="post"
           class="registration_container d_flex flex_gap_s registration_margin_custom_small flex_dir_col flex_gap_xs form_width">
-          <input type="number" name="budget" placeholder="set this month's budget" class="align_self_baseline">
-          <input type="submit" class="align_self_baseline">
-        </form>
-        <form action=""
-          class="registration_container d_flex flex_gap_s registration_margin_custom_small flex_dir_col flex_gap_xs form_width">
-          <input type="number" placeholder="set expense" class="align_self_baseline">
-          <input type="text" placeholder="set expense name" class="align_self_baseline">
+          <input type="number" name="expense" placeholder="set expense" class="align_self_baseline" required>
+          <input type="text" name="expense_name" placeholder="set expense name" class="align_self_baseline" required>
           <input type="submit" class="align_self_baseline">
         </form>
       </div>
