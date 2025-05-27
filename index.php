@@ -27,6 +27,10 @@ if (isset($_SESSION['m_si_d'])) {
 ");
   $stmt_expense->execute();
   $expense = $stmt_expense->fetchAll(PDO::FETCH_ASSOC);
+  $expense_sum = 0;
+  foreach ($expense as $row) {
+    $expense_sum += $row['expense_price'];
+  }
 
 }
 
@@ -52,7 +56,7 @@ if (isset($_SESSION['m_si_d'])) {
       <div class="registration_container registration_margin_custom_small d_flex flex_dir_col">
         <div class="align_self_baseline">
           <p>Remaining budget: <?php if (isset($budget) && is_array($budget)) {
-            echo $budget['budget'] . ' RSD for the month of ' . Date('M');
+            echo $budget['budget'] - $expense_sum . ' RSD for the month of ' . Date('M');
           }
           ?></p>
           <hr>
