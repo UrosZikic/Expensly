@@ -86,7 +86,7 @@ a:hover {
   display: grid;
 }
 .grid_2_1 {
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr;
 }
 
 /* navigation */
@@ -103,13 +103,17 @@ nav {
 /* forms */
 .registration_container {
   width: 100%;
-  max-width: 50rem;
+  /* max-width: 50rem; */
   margin: 5rem auto;
   border: 3px solid white;
   border-radius: 1rem;
   padding: 2rem;
   align-items: center;
 }
+.max_w_50 {
+  max-width: 50rem;
+}
+
 .registration_margin_custom_small {
   margin: 0 auto;
 }
@@ -137,4 +141,15 @@ form input {
 /* borders */
 .border_rad_s {
   border-radius: 10px;
+}
+
+/* table */
+
+table td,
+table th {
+  border: 2px solid white;
+  font-size: 1.5rem;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
 }

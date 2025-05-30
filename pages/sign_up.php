@@ -44,8 +44,8 @@ if (isset($_SESSION['m_s_d'])) {
 </div>
 
 
-<div class="registration_container d_flex flex_gap_s">
-  <form class="d_flex flex_dir_col flex_gap_xs form_width" action="su_validate.php" method="post">
+<div class="registration_container d_flex flex_gap_s max_w_50">
+  <form class="d_flex flex_dir_col flex_gap_xs form_width " action="su_validate.php" method="post">
     <h2>Register your profile!</h2>
     <input type="text" name="full_name" placeholder="enter your name" value="<?php if ($validate) {
       echo $validate_prev_try['full_name'];

@@ -7,13 +7,14 @@ if (isset($_SESSION['m_si_d'])) {
   $fetch_nickname = $_SESSION['m_si_d'];
   $nickname = $fetch_nickname['nickname'];
 
+  $current_month = Date("M");
 
   // fetch budget
   $stmt = $conn->prepare("
     SELECT monthly_budget.budget
     FROM monthly_budget
     JOIN profiles ON monthly_budget.user_id = profiles.user_id
-    WHERE profiles.nickname = :nickname
+    WHERE profiles.nickname = :nickname AND monthly_budget.month = '$current_month'
 ");
   $stmt->execute(['nickname' => $nickname]);
   $budget = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,7 +24,7 @@ if (isset($_SESSION['m_si_d'])) {
   $stmt_expense = $conn->prepare("
     SELECT expenses.expense_price, expenses.expense_name
     FROM expenses
-    JOIN profiles ON expenses.user_id = profiles.user_id
+    JOIN profiles ON expenses.user_id = profiles.user_id WHERE expenses.month = '$current_month'
 ");
   $stmt_expense->execute();
   $expense = $stmt_expense->fetchAll(PDO::FETCH_ASSOC);
@@ -62,18 +63,30 @@ if (isset($_SESSION['m_si_d'])) {
           <hr>
           <br>
           <p>Expense Record</p>
-          <ul>
+          <!-- <ul> -->
+          <table>
+            <tr>
+              <th>Expense title</th>
+              <th>Expense amount</th>
+            </tr>
             <?php
             foreach ($expense as $row) {
               ?>
-              <div class="d_flex flex_gap_xs">
+              <!-- <div class="d_flex flex_gap_xs">
                 <p><?php echo $row['expense_name']; ?>:</p>
                 <p><?php echo $row['expense_price']; ?></p>
-              </div>
+              </div> -->
+
+              <tr>
+                <td><?php echo $row['expense_name']; ?></td>
+                <td><?php echo $row['expense_price']; ?></td>
+              </tr>
               <?php
             }
             ?>
-          </ul>
+          </table>
+
+          <!-- </ul> -->
         </div>
       </div>
       <div class="d_flex flex_dir_col flex_gap_xs pad_horizontal_xs">
