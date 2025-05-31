@@ -22,11 +22,11 @@ if (isset($_SESSION['m_si_d'])) {
 
   // fetch expenses
   $stmt_expense = $conn->prepare("
-    SELECT expenses.expense_price, expenses.expense_name
+    SELECT expenses.expense_price, expenses.expense_name, expenses.created_at
     FROM expenses
-    JOIN profiles ON expenses.user_id = profiles.user_id WHERE expenses.month = '$current_month'
+    JOIN profiles ON expenses.user_id = profiles.user_id WHERE profiles.nickname = :nickname AND expenses.month = '$current_month'
 ");
-  $stmt_expense->execute();
+  $stmt_expense->execute(['nickname' => $nickname]);
   $expense = $stmt_expense->fetchAll(PDO::FETCH_ASSOC);
   $expense_sum = 0;
   foreach ($expense as $row) {
@@ -72,14 +72,11 @@ if (isset($_SESSION['m_si_d'])) {
             <?php
             foreach ($expense as $row) {
               ?>
-              <!-- <div class="d_flex flex_gap_xs">
-                <p><?php echo $row['expense_name']; ?>:</p>
-                <p><?php echo $row['expense_price']; ?></p>
-              </div> -->
-
               <tr>
                 <td><?php echo $row['expense_name']; ?></td>
                 <td><?php echo $row['expense_price']; ?></td>
+                <td><?php echo strtok($row['created_at'], ' '); ?></td>
+
               </tr>
               <?php
             }
