@@ -56,10 +56,20 @@ if (isset($_SESSION['m_si_d'])) {
     <section class="d_grid grid_2_1">
       <div class="registration_container registration_margin_custom_small d_flex flex_dir_col">
         <div class="align_self_baseline">
-          <p>Remaining budget: <?php if (isset($budget) && is_array($budget)) {
-            echo $budget['budget'] - $expense_sum . ' RSD for the month of ' . Date('M');
+          <?php
+          $validate_budget = isset($budget) && is_array($budget) ? true : false;
+          if ($validate_budget) { ?>
+            <p>Remaining budget: <?php if ($validate_budget) {
+              $remaining_budget = $budget['budget'] - $expense_sum;
+              $spent = !$remaining_budget ? 'budget spent! -' : "";
+              echo $remaining_budget . ' RSD for the month of ' . Date('M') . $spent;
+            }
+            ?></p> <?php } else {
+            ?>
+            <p>Set this month's budget</p>
+            <?php
           }
-          ?></p>
+          ; ?>
           <hr>
           <br>
           <p>Expense Record</p>
@@ -68,12 +78,13 @@ if (isset($_SESSION['m_si_d'])) {
             <tr>
               <th>Expense title</th>
               <th>Expense amount</th>
+              <th>Date</th>
             </tr>
             <?php
             foreach ($expense as $row) {
               ?>
               <tr>
-                <td><?php echo $row['expense_name']; ?></td>
+                <td class="width_38"><?php echo $row['expense_name']; ?></td>
                 <td><?php echo $row['expense_price']; ?></td>
                 <td><?php echo strtok($row['created_at'], ' '); ?></td>
 
@@ -94,7 +105,7 @@ if (isset($_SESSION['m_si_d'])) {
             <input type="submit" class="align_self_baseline">
           </form>
         <?php } ?>
-        <form action="pages/set_expense.php" method="post"
+        <form action="pages/set_expense.php?current_budget=<?php echo $remaining_budget ?>" method="post"
           class="registration_container d_flex flex_gap_s registration_margin_custom_small flex_dir_col flex_gap_xs form_width">
           <input type="number" name="expense" placeholder="set expense" class="align_self_baseline" required>
           <input type="text" name="expense_name" placeholder="set expense name" class="align_self_baseline" required>

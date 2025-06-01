@@ -152,4 +152,10 @@ table th {
   word-wrap: break-word;
   word-break: break-word;
   white-space: normal;
+  padding: 0.2rem;
+}
+
+/* width */
+.width_38 {
+  max-width: 38rem;
 }

@@ -24,6 +24,11 @@ if (isset($_POST['expense']) && is_int(intval($_POST['expense']))) {
   echo $_POST['expense'], gettype($_POST['expense']);
 echo 'expense not set';
 
+if (intval($_GET['current_budget']) < $_POST['expense']) {
+  Header('Location: ../index.php?err=expense_exceeds_budget');
+  exit();
+}
+
 // fetch user
 $user = $_SESSION['m_si_d'];
 $nickname = $user['nickname'];
