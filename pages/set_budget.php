@@ -4,11 +4,17 @@ session_start();
 
 
 
-if (isset($_POST['budget'])) {
-  $budget = intval($_POST['budget']);
-  if (!is_int($budget)) {
-    // Header("Location: ../index.php?error=not_a_number");
-    echo "not number";
+if (isset($_POST['budget']) && $_POST['budget'] != "") {
+  $budget = $_POST['budget'];
+  echo $budget == "";
+  if (!is_int($budget)) { {    // Header("Location: ../index.php?error=not_a_number");
+      echo "not number";
+      exit();
+
+    }
+  } else if ($budget <= 0) {
+    echo "budget invalid";
+    exit();
   }
 } else
   // Header("Location: ../index.php?error=budget_not_set");

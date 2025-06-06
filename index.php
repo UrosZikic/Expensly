@@ -109,15 +109,20 @@ if (isset($_SESSION['m_si_d'])) {
           class="registration_container d_flex flex_gap_s registration_margin_custom_small flex_dir_col flex_gap_xs form_width">
           <input type="number" name="expense" placeholder="set expense" class="align_self_baseline" required>
           <?php
-          $error = $_GET['error'];
-          if (strpos($error, 'budget'))
-            echo $error;
+          if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            if (strpos($error, 'budget'))
+              echo $error;
+          }
           ?>
           <input type="text" name="expense_name" placeholder="set expense name" class="align_self_baseline" required>
           <?php
-          $error = $_GET['error'];
-          if (strpos($error, 'expense'))
-            echo $error;
+          if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            if (strpos($error, 'expense'))
+              echo $error;
+          }
+
           ?>
           <input type="submit" class="align_self_baseline">
         </form>
